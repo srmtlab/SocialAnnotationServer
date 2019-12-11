@@ -98,14 +98,14 @@
                     </div>
                     <div v-if='add_annotation_selected !== ""' class="form-group">
                         <template v-if="add_annotation_selected === 'Issue'">
-                            <label for="add-node-description" class="col-form-label">参照される wikidata</label>
+                            <label for="add-node-description" class="col-form-label">参照される wikidata (https://www.wikidata.org/wiki/QxxxxみたいなURL)</label>
                             <input type="url" pattern="^https?://www.wikidata.org/wiki/.+" class="form-control" id="add-node-description" placeholder="参照される wikidata" required>
                             <div class="invalid-feedback">
                                 関連する wikidataのURLを選択してください
                             </div>
                         </template>
                         <template v-else>
-                            <label for="add-node-description" class="col-form-label">参照される Hypothesis URL</label>
+                            <label for="add-node-description" class="col-form-label">参照される Hypothesis URL (https://hyp.is/xxxxxxxみたいなURLで、このテーブルのHypothesis URLに記載されているもの)</label>
                             <input type="url" pattern="^https?://hyp.is/.+" class="form-control" id="add-node-description" placeholder="参照される Hypothesis URL" required>
                             <div class="invalid-feedback">
                                 関連する HypothesisのURLを選択してください
@@ -179,7 +179,7 @@
                             </div>
                         </template>
                         <template v-else>
-                            <label for="edit-node-description" class="col-form-label">参照される Hypothesis URL</label>
+                            <label for="edit-node-description" class="col-form-label">参照される Hypothesis URL（https://hyp.is/xxxxxxxみたいなURLで、このテーブルのHypothesis URLに記載されているもの）</label>
                             <input type="url" pattern="^https?://hyp.is/.+" class="form-control" id="edit-node-description" placeholder="参照される Hypothesis URL" required>
                             <div class="invalid-feedback">
                                 関連する HypothesisのURLを選択してください
