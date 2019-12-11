@@ -52,11 +52,7 @@ class SocialAnnotationConsumer(WebsocketConsumer):
         if data_operation == "add":
             try:
                 hypothesis_url = data['hypothesis_url']
-
-                hypothesis_text = self.get_hypothesis_text(hypothesis_url)
-                if hypothesis_text == False:
-                    return False
-
+                hypothesis_text = "test Text"
                 annotation_type = data['annotation_type']
                 relevant_url = data['relevant_url']
             except KeyError:
