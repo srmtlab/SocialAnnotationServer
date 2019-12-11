@@ -53,7 +53,7 @@
             <th scope="row">${ annotation.annotation_id }</th>
             <td>${ annotation.hypothesis_url }</td>
             <td>${ annotation.hypothesis_text }</td>
-            <td>${ annotation.annotation_type }</td>
+            <td>${ annotation_type_dict[annotation.annotation_type] }</td>
             <td>${ annotation.relevant_url }</td>
             <td><button type="button" v-on:click="show_edit_annotation(annotation)" class="btn btn-primary">編集</button></td>
             <td><button type="button" v-on:click="show_delete_annotation(annotation)" class="btn btn-danger">削除</button></td>
@@ -164,7 +164,7 @@
                         <label for="edit-node-type" class="col-form-label">分類 </label>
                         <select v-model="edit_annotation_selected" class="custom-select" id="edit-node-type" required>
                             <option value="Issue">地域課題</option>
-                            <option value="Whom">当事者（誰が嬉しいのか）</option>
+                            <option value="Whom">当事者（誰が困っているのか）</option>
                             <option value="Where">地域（場所）</option>
                             <option value="How">取り組み</option>
                             <option value="Who">取り組みを行っている人（誰がやっているのか）</option>

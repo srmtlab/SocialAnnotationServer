@@ -24,6 +24,13 @@ function init_data(websocket_url){
                 data: {
                     current_annotation: null,
                     annotation_list : annotation_list,
+                    annotation_type_dict: {
+                        "Issue": "地域課題",
+                        "Whom": "当事者（誰が困っているのか）",
+                        "Where": "地域（場所）",
+                        "How": "取り組み",
+                        "Who": "取り組みを行っている人（誰がやっているのか）"
+                    }
                 },
                 methods:{
                     show_edit_annotation :function(annotation){

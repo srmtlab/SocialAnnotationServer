@@ -59,10 +59,10 @@ function send_delete_node(d) {
 function delete_node(data) {
 
     annotation_list.some(function (v, i) {
-          if(v['annotation_id']===data['annotation_id']){
-              annotation_list.splice(i,1);
-          }
-      }  
+            if(v['annotation_id']===data['annotation_id']){
+                annotation_list.splice(i,1);
+            }
+        }
     );
 }
 /* end delete node */
@@ -105,11 +105,11 @@ function send_edit_node(d) {
 
 function edit_node(data) {
     annotation_list.some(function (v, i) {
-          if(v['annotation_id']===data['annotation_id']){
-              v['annotation_type'] = data['annotation_type'];
-              v['relevant_url'] = data['relevant_url'];
-          }
-      }
+            if(v['annotation_id']===data['annotation_id']){
+                v['annotation_type'] = data['annotation_type'];
+                v['relevant_url'] = data['relevant_url'];
+            }
+        }
     );
 }
 /* end edit node */
