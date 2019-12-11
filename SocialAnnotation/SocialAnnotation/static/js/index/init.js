@@ -35,6 +35,22 @@ function init_data(websocket_url){
                 }
             });
 
+            new Vue({
+                el: '#add-node',
+                delimiters: ['${', '}'],
+                data: {
+                    add_annotation_selected: ''
+                }
+            });
+
+            new Vue({
+                el: '#edit-node',
+                delimiters: ['${', '}'],
+                data: {
+                    edit_annotation_selected: ''
+                }
+            });
+
             init_flag = false;
         }
         else if(status === "work"){

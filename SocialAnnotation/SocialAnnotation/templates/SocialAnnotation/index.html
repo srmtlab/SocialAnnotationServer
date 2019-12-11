@@ -77,17 +77,17 @@
                 <form name="addNode" novalidate>
                     <div class="form-group">
                         <label for="add-node-name" class="col-form-label">Hypothesis URL <span style="color: red">(必須)</span></label>
-                        <input type="text" class="form-control" id="add-node-name" placeholder="ノード名" required>
+                        <input type="url" pattern="^https?://hyp.is/.+" class="form-control" id="add-node-name" placeholder="Hypothesis URL" required>
                         <div class="invalid-feedback">
                             Hypothesis上のURLを入力してください
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="add-node-type" class="col-form-label">分類 <span style="color: red">(必須)</span></label>
-                        <select class="custom-select" id="add-node-type" required>
+                        <select v-model="add_annotation_selected" class="custom-select" id="add-node-type" required>
                             <option value="" selected>選択してください</option>
                             <option value="Issue">地域課題</option>
-                            <option value="Whom">当事者（誰が嬉しいのか）</option>
+                            <option value="Whom">当事者（誰が困っているのか）</option>
                             <option value="Where">地域（場所）</option>
                             <option value="How">取り組み</option>
                             <option value="Who">取り組みを行っている人（誰がやっているのか）</option>
@@ -96,12 +96,22 @@
                             分類を選択してください
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="add-node-description" class="col-form-label">関連するURL</label>
-                        <input type="text" class="form-control" id="add-node-description" placeholder="ノード名" required>
-                        <div class="invalid-feedback">
-                            関連するURLを選択してください
-                        </div>
+                    <div v-if='add_annotation_selected !== ""' class="form-group">
+                        <template v-if="add_annotation_selected === 'Issue'">
+                            <label for="add-node-description" class="col-form-label">参照される wikidata</label>
+                            <input type="url" pattern="^https?://www.wikidata.org/wiki/.+" class="form-control" id="add-node-description" placeholder="参照される wikidata" required>
+                            <div class="invalid-feedback">
+                                関連する wikidataのURLを選択してください
+                            </div>
+                        </template>
+                        <template v-else>
+                            <label for="add-node-description" class="col-form-label">参照される Hypothesis URL</label>
+                            <input type="url" pattern="^https?://hyp.is/.+" class="form-control" id="add-node-description" placeholder="参照される Hypothesis URL" required>
+                            <div class="invalid-feedback">
+                                関連する HypothesisのURLを選択してください
+                            </div>
+                        </template>
+
                     </div>
                 </form>
             </div>
@@ -144,7 +154,7 @@
                 <form name="editNode" novalidate>
                     <div class="form-group">
                         <label for="edit-node-name" class="col-form-label">Hypothesis URL <span style="color: red">(必須)</span></label>
-                        <input type="text" class="form-control" id="edit-node-name" placeholder="Hypothesis URL" disabled="disabled" required >
+                        <input type="url" class="form-control" id="edit-node-name" placeholder="Hypothesis URL" disabled="disabled" required >
                     </div>
                     <div class="form-group">
                         <label for="edit-node-text" class="col-form-label">アノテーション</label>
@@ -152,8 +162,7 @@
                     </div>
                     <div class="form-group">
                         <label for="edit-node-type" class="col-form-label">分類 </label>
-                        <select class="custom-select" id="edit-node-type" required>
-                            <option value="" selected>選択してください</option>
+                        <select v-model="edit_annotation_selected" class="custom-select" id="edit-node-type" required>
                             <option value="Issue">地域課題</option>
                             <option value="Whom">当事者（誰が嬉しいのか）</option>
                             <option value="Where">地域（場所）</option>
@@ -162,11 +171,20 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="edit-node-description" class="col-form-label">関連するURL</label>
-                        <input type="text" class="form-control" id="edit-node-description" placeholder="関連するURL" required>
-                        <div class="invalid-feedback">
-                            関連するURLを選択してください
-                        </div>
+                        <template v-if="edit_annotation_selected === 'Issue'">
+                            <label for="edit-node-description" class="col-form-label">参照される wikidata</label>
+                            <input type="url" pattern="^https?://www.wikidata.org/wiki/.+" class="form-control" id="edit-node-description" placeholder="参照される wikidata" required>
+                            <div class="invalid-feedback">
+                                関連する wikidataのURLを選択してください
+                            </div>
+                        </template>
+                        <template v-else>
+                            <label for="edit-node-description" class="col-form-label">参照される Hypothesis URL</label>
+                            <input type="url" pattern="^https?://hyp.is/.+" class="form-control" id="edit-node-description" placeholder="参照される Hypothesis URL" required>
+                            <div class="invalid-feedback">
+                                関連する HypothesisのURLを選択してください
+                            </div>
+                        </template>
                     </div>
                 </form>
             </div>
