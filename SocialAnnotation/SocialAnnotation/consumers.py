@@ -24,22 +24,29 @@ class SocialAnnotationConsumer(WebsocketConsumer):
         repatter = re.compile(pattern)
         result = repatter.match(hypothesis_url)
 
-        url = "https://api.hypothes.is/api/annotations/" + result[1]
-
-        headers = {
-            'authorization': "Bearer 6879-5xKEqgNrOAhD3-ak-K0_zo_KRJ5YK6qV6c53d5jiHm4",
-        }
-
-        response = requests.request("GET", url, headers=headers)
-
-        if response.status_code == 200:
-            text_data_json = json.loads(response.text)
-            for selector in text_data_json["target"][0]["selector"]:
-                if selector["type"] == "TextQuoteSelector":
-                    return selector["exact"]
-        else:
+        if result is None:
             return False
+        else:
+            print(result)
 
+            url = "https://api.hypothes.is/api/annotations/" + result[1]
+
+            headers = {
+                'authorization': "Bearer 6879-H12wVKdvYUWDKZxGbAmOCnsAMd45X-JP2m24q_L-BcY",
+            }
+
+            response = requests.request("GET", url, headers=headers)
+
+            print(url)
+            print(response)
+
+            if response.status_code == 200:
+                text_data_json = json.loads(response.text)
+                for selector in text_data_json["target"][0]["selector"]:
+                    if selector["type"] == "TextQuoteSelector":
+                        return selector["exact"]
+            else:
+                return False
 
     def disconnect(self, close_code):
         # Leave room group
@@ -52,7 +59,10 @@ class SocialAnnotationConsumer(WebsocketConsumer):
         if data_operation == "add":
             try:
                 hypothesis_url = data['hypothesis_url']
-                hypothesis_text = "test Text"
+                hypothesis_text = self.get_hypothesis_text(hypothesis_url)
+                if not hypothesis_text:
+                    return False
+
                 annotation_type = data['annotation_type']
                 relevant_url = data['relevant_url']
             except KeyError:
