@@ -30,6 +30,7 @@ class SocialAnnotationConsumer(WebsocketConsumer):
             print(result)
 
             url = "https://api.hypothes.is/api/annotations/" + result[1]
+            print(url)
 
             headers = {
                 'authorization': "Bearer 6879-H12wVKdvYUWDKZxGbAmOCnsAMd45X-JP2m24q_L-BcY",
@@ -37,7 +38,7 @@ class SocialAnnotationConsumer(WebsocketConsumer):
 
             response = requests.request("GET", url, headers=headers)
 
-            print(url)
+
             print(response)
 
             if response.status_code == 200:
